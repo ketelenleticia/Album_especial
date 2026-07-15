@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Love letter for crush</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="min-h-screen bg-[#fef4f4] flex flex-col items-center justify-center overflow-hidden m-0 p-4">
+
+    <h2 id="main-title" style="font-family:'Allura', cursive;"
+        class="py-4 text-center text-6xl text-red-700 select-none transition-all duration-1000">Abre a carta</h2>
+
+    <div class="envlope-wrapper flex flex-col items-center justify-center w-full max-w-md relative">
+
+        <div id="envelope" class="close transition-all duration-1000 ease-in-out">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+
+            <div class="letter">
+                <div class="words line1">Dear...</div>
+                <div class="words line2">I just wanted</div>
+                <div class="words line3">to say that</div>
+                <div class="words line4">I like you! ❤️</div>
+            </div>
+
+            <div class="hearts">
+                <div class="heart a1"></div>
+                <div class="heart a2"></div>
+                <div class="heart a3"></div>
+            </div>
+        </div>
+
+        <div id="video-card"
+            class="absolute hidden opacity-0 scale-50 transition-all duration-1000 ease-out bg-white p-6 rounded-2xl shadow-2xl flex flex-col items-center justify-center w-[90vw] max-w-[560px] z-50">
+            <h3 style="font-family:'Dancing Script', cursive;" class="text-3xl text-red-600 mb-4 font-bold text-center">
+                Para ti... ❤️</h3>
+
+            <div class="w-full aspect-video rounded-lg overflow-hidden bg-black shadow-inner">
+                <iframe id="love-iframe" class="w-full h-full" src="assets/videos/cardvid.mp4" title="Love Video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="reset mt-12 z-50 relative">
+        <button id="open">Open</button>
+        <button id="reset">Close</button>
+    </div>
+
+    <style>
+        #envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #d9534f;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .front {
+            position: absolute;
+            width: 0;
+            height: 0;
+            z-index: 3;
+        }
+
+        .flap {
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-bottom: 82px solid transparent;
+            border-top: 98px solid #d9534f;
+            transform-origin: top;
+            pointer-events: none;
+        }
+
+        .pocket {
+            border-left: 140px solid #f5a3a2;
+            border-right: 140px solid #f5a3a2;
+            border-bottom: 90px solid #ff6f61;
+            border-top: 90px solid transparent;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        .letter {
+            position: relative;
+            background-color: #fff;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 90%;
+            top: 5%;
+            border-radius: 6px;
+            box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+            font-family: "Dancing Script", cursive;
+            z-index: 1;
+            transition: transform 0.6s ease, z-index 0.6s step-start;
+        }
+
+        .words {
+            position: absolute;
+            left: 10%;
+            width: 80%;
+            height: 14%;
+            background-color: transparent;
+        }
+
+        .words.line1 {
+            top: 10%;
+            width: 20%;
+            height: 7%;
+            font-size: 1rem;
+        }
+
+        .words.line2 {
+            top: 30%;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .words.line3 {
+            top: 50%;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .words.line4 {
+            top: 70%;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .open .flap {
+            transform: rotateX(180deg);
+            transition: transform 0.4s ease, z-index 0.6s;
+            z-index: 1;
+        }
+
+        .close .flap {
+            transform: rotateX(0deg);
+            transition: transform 0.4s 0.6s ease, z-index 1s;
+            z-index: 5;
+        }
+
+        .close .letter {
+            transform: translateY(0px) scale(1);
+            transition: transform 0.4s ease, z-index 1s;
+            z-index: 1;
+        }
+
+        .open .letter {
+            transform: translateY(-80px);
+            transition: transform 0.6s 0.4s ease, z-index 0.4s step-end;
+            z-index: 10;
+        }
+
+        /* --- CORAÇÕES --- */
+        .hearts {
+            position: absolute;
+            top: 90px;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+            pointer-events: none;
+        }
+
+        .heart:before,
+        .heart:after {
+            position: absolute;
+            content: "";
+            left: 50px;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            background: #a40303;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .close .heart {
+            opacity: 0;
+            animation: none;
+        }
+
+        .a1 {
+            left: 20%;
+            transform: scale(0.6);
+            animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+            animation-delay: 0.7s;
+        }
+
+        .a2 {
+            left: 55%;
+            transform: scale(1);
+            animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+            animation-delay: 0.7s;
+        }
+
+        .a3 {
+            left: 10%;
+            transform: scale(0.8);
+            animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+            animation-delay: 0.7s;
+        }
+
+        @keyframes slideUp {
+            0% {
+                top: 0;
+            }
+
+            100% {
+                top: -600px;
+            }
+        }
+
+        @keyframes sideSway {
+            0% {
+                margin-left: 0px;
+            }
+
+            100% {
+                margin-left: 50px;
+            }
+        }
+
+        .envlope-wrapper {
+            height: 380px;
+        }
+
+        .reset button {
+            font-weight: 800;
+            transition: all 0.1s linear;
+            background-color: transparent;
+            border: solid 2px #d9534f;
+            border-radius: 4px;
+            color: #d9534f;
+            display: inline-block;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin: 5px;
+            padding: 10px;
+            line-height: 1em;
+            min-width: 120px;
+            cursor: pointer;
+        }
+
+        .reset button:hover {
+            background-color: #d9534f;
+            color: #fff;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            var envelope = $("#envelope");
+            var videoCard = $("#video-card");
+            var mainTitle = $("#main-title");
+            var btn_open = $("#open");
+            var btn_reset = $("#reset");
+
+            envelope.click(function () {
+                open();
+            });
+            btn_open.click(function () {
+                open();
+            });
+            btn_reset.click(function () {
+                close();
+            });
+
+            function open() {
+                // 1. Inicia a animação padrão de abrir o envelope
+                envelope.addClass("open").removeClass("close");
+
+                // 2. Após a carta subir um pouco (1 segundo), faz o envelope e o título desaparecerem
+                setTimeout(function () {
+                    envelope.addClass("opacity-0 pointer-events-none scale-70");
+                    mainTitle.addClass("opacity-0 scale-70");
+
+                    // 3. Torna o bloco do vídeo visível no HTML (display: flex)
+                    videoCard.removeClass("hidden");
+
+                    // 4. Um pequeno frame depois, engatilha a animação de crescimento suave (zoom-in)
+                    setTimeout(function () {
+                        videoCard.addClass("opacity-100 scale-100");
+                    }, 50);
+
+                }, 1000);
+            }
+
+            function close() {
+                // 1. Encolhe o cartão do vídeo primeiro
+                videoCard.removeClass("opacity-100 scale-100").addClass("opacity-0 scale-50");
+
+                // Opcional: Pausa o iframe do YouTube ao fechar (recarregando o src)
+                var iframeSrc = $("#love-iframe").attr("src");
+                $("#love-iframe").attr("src", iframeSrc);
+
+                // 2. Após o vídeo sumir, traz o envelope e o título de volta
+                setTimeout(function () {
+                    videoCard.addClass("hidden");
+                    envelope.removeClass("opacity-0 pointer-events-none scale-70").addClass("close")
+                        .removeClass("open");
+                    mainTitle.removeClass("opacity-0 scale-70");
+                }, 600);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
+</html>
